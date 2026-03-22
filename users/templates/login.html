@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{%  load crispy_forms_tags %}
+{%  block content %}
+    <div class="row ">
+     <div class="col-4 mb-4">
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {{ login_form|crispy }}
+            <div class="mt-3">
+            <button class="btn btn-primary" type="submit">Login</button> No account Then <a href="{% url 'register' %}">Register</a>
+            </div>
+        </form>
+    </div>
+    </div>
+{% endblock content %}
