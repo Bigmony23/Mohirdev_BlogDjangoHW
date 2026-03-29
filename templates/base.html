@@ -10,7 +10,7 @@
 <body class="bg-light d-flex flex-column min-vh-100">
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4 sticky-top">
   <div class="container">
     <a class="navbar-brand fw-bold text-primary" href="#">MyBlog</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -18,14 +18,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Posts</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{% url 'posts' %}">Posts</a></li>
       </ul>
       <ul class="navbar-nav ms-auto">
           {% if request.user.is_authenticated %}
           <li class="nav-item"><a class="btn btn-outline-primary me-2" href="{% url 'logout' %}">Logout</a></li>
+              <li class="nav-item"><a class="btn btn-outline-primary me-2" href="{% url 'profile' %}">Profile</a></li>
+              <li class="nav-item"><a class="btn btn-outline-primary me-2" href="{% url 'add_post' %}">Add post</a></li>
           {% else %}
         <li class="nav-item"><a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a></li>
         <li class="nav-item"><a class="btn btn-primary" href="{% url 'register' %}">Register</a></li>
@@ -44,11 +44,7 @@
 <footer class="bg-white border-top py-4 mt-auto">
   <div class="container d-flex justify-content-between align-items-center">
     <span class="text-muted">© 2025 MyBlog. All rights reserved.</span>
-    <div class="d-flex gap-3">
-      <a href="#" class="text-muted text-decoration-none">Privacy</a>
-      <a href="#" class="text-muted text-decoration-none">Terms</a>
-      <a href="#" class="text-muted text-decoration-none">Contact</a>
-    </div>
+
   </div>
 </footer>
 

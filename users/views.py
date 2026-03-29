@@ -41,5 +41,10 @@ class LogoutView(View):
         messages.info(request,'You are now logged out')
         return redirect('home')
 
+class ProfileView(View):
+    def get(self,request):
+        return render(request,'profile.html',{"user":request.user})
+
+
 
 # Create your views here.

@@ -10,6 +10,9 @@ class Post(models.Model):
     category=models.CharField(max_length=200)
     tegs=models.CharField(max_length=200)
     user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='posts')
+    is_active=models.BooleanField(default=False)
+    views=models.PositiveIntegerField(default=0)
+    created_at=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+
+    {% if post.image %}
+    <img class="img-fluid rounded w-100 mb-4" src="{{ post.image.url }}" style="max-height: 400px; object-fit: cover;">
+    {% endif %}
+    <span class="badge bg-primary mb-2">{{ post.category }}</span>
+    <h2 class="fw-bold mb-2">{{ post.title }}</h2>
+    <div class="d-flex align-items-center gap-3 mb-4 text-muted">
+      <small>By <strong>{{post.user.full_name }}</strong></small>
+      <small>·</small>
+      <small>{{ post.tegs }}</small>
+    </div>
+    <hr>
+    <p class="mt-3 lh-lg">{{ post.content }}</p>
+     <hr>
+    <h3> Add comment</h3>
+  <div class="row mb-4">
+    <div class="col-6">
+        <form method="post" action="{% url 'add_comment' post.id %}">
+            {% csrf_token %}
+            {{comment_form | crispy}}
+            <button class="btn btn-success"> Add comment </button>
+        </form>
+    </div>
+</div>
+  <!-- COMMENTS -->
+{% if post.comments.exists %}
+    <h4>Comments</h4>
+    {% for comment in post.comments.all %}
+        <div class="row mb-3">
+            <div class="col-1 me-2">
+                {% if comment.user.profile_picture %}
+                    <img class="small_profile_pic" src="{{ comment.user.profile_picture.url }}">
+                {% endif %}
+            </div>
+            <div class="col-7">
+                <strong>{{ comment.user.username }}</strong>
+                <p class="mt-2 font-monospace">{{ comment.text }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+    <a href="{% url 'posts' %}" class="btn btn-outline-secondary mt-4">← Back to Posts</a>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for post in posts %}
+    <div class="row">
+    <div class="col-2">
+        {% if post.image %}
+        <img src="{{ post.image.url }}" class="img-fluid">
+        {% endif %}
+    </div>
+    <div class="col-6">
+      <a href="{% url 'post_detail' post.id %}"><h3>{{ post.title }}</h3></a>
+        <p>{{ post.content }}</p>
+        <small class="text-muted">By {{ post.user.username }} Category {{ post.category }}</small>
+        <p><small class="text-muted">Tegs #{{post.tegs  }}</small></p>
+    </div>
+    </div>
+    <hr>
+    {% empty %}
+    <p class="text-muted">No posts yet</p>
+    {% endfor %}
+{% endblock content %}
